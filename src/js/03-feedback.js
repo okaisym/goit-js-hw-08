@@ -1,4 +1,3 @@
-
 import throttle from 'lodash.throttle';
 
 const formEl = document.querySelector('.feedback-form');
@@ -9,22 +8,32 @@ formEl.addEventListener('submit', onFormSubmit)
 formEl.addEventListener('input', throttle(onFormInput, 500));
 
 const savedData = 'feedback-form-state';
-
-const formData = {
-        email: '',
-        message: '',  
-    };
-
-    processingTheForm();
+processingTheForm();
 
     function onFormSubmit(e) {
         e.preventDefault();
+        const formData = {
+            email: emailInput.value,
+            message: messageInput.value,  
+        };
+
+        console.log(formData);
         localStorage.removeItem(savedData);
-        e.currentTarget.reset();
-        console.log(formData)
+         
+        // emailInput.value = '';
+        // messageInput.value = '';
+
+        if (emailInput.value === "" || messageInput.value === "") {
+        alert('Заповніть порожні поля!');
+        return; 
     }
+};
 
     function onFormInput(e) {
+        const formData = {
+            email: emailInput.value,
+            message: messageInput.value,  
+        };
         formData[e.target.name] = e.target.value;
         localStorage.setItem(savedData, JSON.stringify(formData));
     }
