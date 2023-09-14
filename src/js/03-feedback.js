@@ -20,8 +20,8 @@ processingTheForm();
         console.log(formData);
         localStorage.removeItem(savedData);
          
-        // emailInput.value = '';
-        // messageInput.value = '';
+        emailInput.value = '';
+        messageInput.value = '';
 
         if (emailInput.value === "" || messageInput.value === "") {
         alert('Заповніть порожні поля!');
