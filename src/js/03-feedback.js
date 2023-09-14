@@ -16,16 +16,15 @@ processingTheForm();
             email: emailInput.value,
             message: messageInput.value,  
         };
-
+            
         console.log(formData);
         localStorage.removeItem(savedData);
-         
-        emailInput.value = '';
-        messageInput.value = '';
 
-        if (emailInput.value === "" || messageInput.value === "") {
-        alert('Заповніть порожні поля!');
-        return; 
+        if (!(emailInput.value === "" || messageInput.value === "")) {
+        emailInput.value = '';
+        messageInput.value = ''; } else {
+            alert('Заповніть порожні поля!');
+        return;  
     }
 };
 
