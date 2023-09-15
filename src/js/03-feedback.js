@@ -4,7 +4,12 @@ const formEl = document.querySelector('.feedback-form');
 const emailInput = document.querySelector('[name="email"]');
 const messageInput = document.querySelector('[name="message"]');
 
-formEl.addEventListener('submit', onFormSubmit)
+const formData = {
+            email: emailInput.value,
+            message: messageInput.value,  
+        };
+        
+        formEl.addEventListener('submit', onFormSubmit)
 formEl.addEventListener('input', throttle(onFormInput, 500));
 
 const savedData = 'feedback-form-state';
@@ -12,27 +17,24 @@ processingTheForm();
 
     function onFormSubmit(e) {
         e.preventDefault();
-        const formData = {
-            email: emailInput.value,
-            message: messageInput.value,  
-        };
+        formData.email = emailInput.value;
+        formData.message = messageInput.value;
             
-        console.log(formData);
-        localStorage.removeItem(savedData);
-
+        
+                
         if (!(emailInput.value === "" || messageInput.value === "")) {
         emailInput.value = '';
-        messageInput.value = ''; } else {
+        messageInput.value = ''; 
+    } else {
             alert('Заповніть порожні поля!');
         return;  
     }
+    
+    console.log(formData);
+    localStorage.removeItem(savedData);
 };
 
     function onFormInput(e) {
-        const formData = {
-            email: emailInput.value,
-            message: messageInput.value,  
-        };
         formData[e.target.name] = e.target.value;
         localStorage.setItem(savedData, JSON.stringify(formData));
     }
